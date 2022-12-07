@@ -31,7 +31,16 @@ Example:
      ```
    - `charAt` accepts a index (number data type) and return the character on that index in the string.
 
+
 2. `toUpperCase`
+Parameter: () - string data type.
+
+Return: A new string representing the calling string converted to upper case.
+
+Example:
+
+let name = Devanand kumar;
+name.u
 3. `toLowerCase`
 4. `trim`
 5. `trimEnd`
