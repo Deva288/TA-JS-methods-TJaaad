@@ -17,17 +17,79 @@ let persons = [
 
 // Find the average grade
 
+let personsLength = persons.length;
+
+let totalGrade = persons.reduce((acc, cv) => {
+  return acc + cv.grade;
+}, 0)
+
+console.log(totalGrade / personsLength);
+
+
 // Find the average grade of male
+
+let male = 
+    persons.filter((person) => person.sex === "M")
+
+let totalGradeOfMale =
+    male
+    .reduce((acc, cv) => {
+      return acc + cv.grade
+    }, 0);
+
+    console.log(totalGradeOfMale / male.length);
 
 // Find the average grade of female
 
+let female = 
+    persons.filter((person) => person.sex === "F")
+
+let totalGradeOfFemale =
+    female
+    .reduce((acc, cv) => {
+      return acc + cv.grade
+    }, 0);
+
+    console.log(totalGradeOfFemale / female.length);
+
 // Find the highest grade
+
+let highestGrade = 
+    persons
+    .map((person) => person.grade) 
+    .sort((a, b) => a - b).pop();
+
+console.log(highestGrade);
 
 // Find the highest grade in male
 
-// Find the highest grade in female
+let maleHighestGrade = persons
+      .filter((person) => person.sex === "M")
+      .map((person) => person.grade)
+      .sort((a, b) => a - b).pop();
 
+      console.log(maleHighestGrade);
+
+
+// Find the highest grade in female
+let femaleHighestGrade = female
+      // .filter((person) => person.sex === "F")
+      .map((person) => person.grade)
+      .sort((a, b) => a - b).pop();
+
+      console.log(femaleHighestGrade);
 // Find the highest grade for people whose name starts with 'J' or 'P'
+
+let highestNameWithJOrP = 
+  persons
+    .filter((person) => person.name.startsWith("J"))
+                      
+    .map((person) => person.grade)                  
+    .sort((a, b) => a - b).pop();
+
+console.log(highestNameWithJOrP);
+
+
 
 const fruitBasket = [
   'banana',
@@ -52,6 +114,17 @@ Output:
 {banana: 2, cherry: 3, orange: 3, apple: 2, fig: 1}
 */
 
+let fruitsObj = fruitBasket.reduce((acc, fruit) => {
+  if (acc[fruit]) {
+    acc[fruit] = acc[fruit] + 1;
+  } else {
+    acc[fruit] = 1;
+  }
+  return acc;
+}, {});
+
+console.log(fruitsObj);
+
 /* 
 
 Use the fruitBasket array to create an array of array. Each array will contain two values name of fruit and number of times
@@ -62,6 +135,11 @@ Output:
 [['banana', 2], ['cherry', 3], ['orange', 3], ['apple', 2], ['fig', 1]]
 */
 
+let newArray = Object.entries(fruitsObj);
+  
+console.log(newArray);
+
+
 const data = [
   [1, 2, 3],
   [4, 5, 6],
@@ -70,6 +148,11 @@ const data = [
 ];
 
 // Using reduce flat data array
+let flatArr = data.reduce((acc, cv) => {
+  acc = acc.concat(cv);
+  return acc;
+});
+console.log(flatArr);
 
 const dataTwo = [
   [1, 2, 3],
@@ -80,6 +163,16 @@ const dataTwo = [
 
 // Using reduce flat dataTwo array
 
+let flatArrTwo = dataTwo.reduce((acc, cv) => {
+  acc = acc.concat(cv.flat(Infinity));
+  return acc;
+});
+
+console.log(flatArrTwo);
+
+
+// console.log(dataTwo.flat(Infinity));
+
 /*
 
 Create these functions which accepts a number value and returns a number value:
@@ -89,6 +182,28 @@ Create these functions which accepts a number value and returns a number value:
   - `triple` triples the input 
   - `half` converts the value to half and return the integer value not decimal (use Math.round(21.5) => 21)
 */
+
+function increment(a) {
+  return a += 1;
+};
+
+function double(a) {
+  return a *= 2;
+};
+
+function decrement(a) {
+  return a -= 1;
+};
+
+function triple(a) {
+  return a *= 3;
+};
+
+function half(a) {
+       a /= 2;
+  return Math.round(a);
+};
+
 
 let pipeline = [
   increment,
@@ -114,6 +229,14 @@ EXAMPLE:
 
   ...
 */
+let value = pipeline.reduce((acc, cv) => {
+  acc = cv(acc);
+  return acc;
+}, 3);
+
+console.log(value);
+
+
 
 let pipeline2 = [
   increment,
@@ -130,3 +253,9 @@ let pipeline2 = [
 ];
 
 // Find the output using pipeline2 the initial value if 8
+let finalValue = pipeline2.reduce((acc, fv) => {
+  acc = fv(acc);
+  return acc;
+}, 8);
+
+console.log(finalValue);
